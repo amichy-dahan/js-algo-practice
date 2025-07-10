@@ -13,8 +13,33 @@ The array may contain duplicates.
 Multiple solutions can exist, any solution is sufficient to return true.
 */
 
-function canPartition( /*args*/ ) {
-  //your code
+function canPartition( arr ) {
+
+let zero = arr.filter(i => i== 0)
+if(zero.length >1){
+  return true;
+}else{
+ 
 }
+let res = 1
+for (const element of arr) {
+  res*= element;
+}
+let a = 0;
+for (const element of arr) {
+  if(res/element == element){
+    a =element;
+  }
+}
+if(a !=0){
+  return true
+}else{
+  return false
+}
+
+}
+
+
+
 
 exports.solution = canPartition;
