@@ -13,7 +13,7 @@ champions([
  loss: 3,
  draws: 5,
  scored: 88,
- conceded: 20,
+ conceded: 30,
  },
  {
  name: "Arsenal",
@@ -35,8 +35,76 @@ champions([
 ➞ "Manchester United"
 */
 
-function champions( /*args*/ ) {
-  //your code
+
+let champion = [
+  {
+    name: "Manchester United",
+    wins: 40,
+    loss: 3,
+    draws: 8,
+    scored: 88,
+    conceded: 1,
+  },
+  {
+    name: "Arsenal",
+    wins: 40,
+    loss: 6,
+    draws: 8,
+    scored: 98,
+    conceded: 29,
+  },
+  {
+    name: "Chelsea",
+    wins: 22,
+    loss: 8,
+    draws: 8,
+    scored: 98,
+    conceded: 29,
+  },
+]
+let newArray = [];
+
+function champions(champion) {
+
+  newArray = champion.map((obj) => ({
+    name: obj.name,
+    points: (3 * obj.wins) + (1 * obj.draws),
+    difference: obj.scored - obj.conceded
+  }));
+
+  let winner = findWinner(newArray);
+  return winner;
 }
+champions(champion);
+
+
+
+function findWinner(array) {
+
+  let nameChampion = newArray[0].name
+  let winObj = newArray[0]
+  let maxPoints = newArray[0].points
+
+  for (let key in newArray) {
+    if (newArray[key].points > maxPoints) {
+      maxPoints = newArray[key].points;
+      nameChampion = newArray[key].name
+      winObj = newArray[key];
+    } else if (newArray[key].points === maxPoints) {
+      if (newArray[key].difference > winObj.difference) {
+        nameChampion = newArray[key].name;
+      } else {
+        nameChampion = winObj.name;
+      }
+    }
+
+  }
+      return nameChampion;
+
+}
+
+
+
+
 
 exports.solution = champions;
